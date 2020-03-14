@@ -13,7 +13,7 @@ const shoppingLists_view = ((data) =>{
                 <button type="submit">Log out</button>
             </form>
             <form action="/add-shopping-list" method="POST">
-                <input type="text" name="list_name" value="name">
+                <input type="text" name="list_name" placeholder="name of list">
                 <button type="submit">Add shopping list</button>
             </form>`;
     data.shoppingLists.forEach((shoppingList) => {
@@ -44,6 +44,25 @@ const shoppingList_view = ((data) => {
         </head>
         <body>
             Shopping list: ${data.shopping_list_name}
+            <form action="/add-product" method="POST">
+                <input type="text" name="product_name" placeholder="name of product">
+                <input type="number" name="quantity" min="1" value="1">
+                <input type="text" name="product_image" placeholder="url for image">
+                <input type="hidden" name="list_id", value="${data.shoppingList_id}">
+                <button type="submit">Add product to list</button>
+            </form>`;
+    data.products.forEach((product) => {
+        html += `
+            <div>
+                ${product.name}, ${product.quantity}
+                <form action="/delete-product" method="POST">
+                    <input type="hidden" name="product_id", value="${product._id}">
+                    <button type="submit" class="delete_button">Delete product</button>
+                </form>
+            </div>`;
+    });
+
+    html += `
         </body>
         </html>
     `;

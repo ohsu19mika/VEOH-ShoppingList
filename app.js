@@ -47,7 +47,8 @@ app.post('/logout', auth_controller.post_logout);
 app.get('/', is_logged_handler, shoppingList_controller.get_shoppingLists);
 app.get('/shoppingList/:name', is_logged_handler, shoppingList_controller.get_shoppingList)
 app.post('/add-shopping-list', is_logged_handler, shoppingList_controller.post_shoppingList);
-
+app.post('/delete-shopping-list', is_logged_handler, shoppingList_controller.post_delete_shoppingList);
+app.post('/add-product', is_logged_handler, shoppingList_controller.post_add_product);
 
 //Not found
 app.use((req, res, next) => {
