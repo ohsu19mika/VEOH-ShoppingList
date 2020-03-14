@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 //Controllers
 const auth_controller = require('./controllers/auth-controllers');
+const shoppingList_controller = require('./controllers/shoppingList-controllers')
 
 let app = express();
 
@@ -41,6 +42,11 @@ app.get('/', auth_controller.get_main);
 app.post('/login', auth_controller.post_login);
 app.post('/register', auth_controller.post_register);
 app.post('/logout', auth_controller.post_logout);
+
+//Shoppinglists
+app.get('/', is_logged_handler, shoppingList_controller.get_shoppingLists);
+app.get('/shoppingList/:name', is_logged_handler, shoppingList_controller.get_shoppingList)
+app.post('/add-shopping-list', is_logged_handler, shoppingList_controller.post_shoppingList);
 
 
 //Not found
