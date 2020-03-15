@@ -2,6 +2,7 @@ const shoppingList_model = require('../models/shoppingList-model');
 const shoppingList_views = require('../views/shoppingList-views');
 const product_model = require('../models/product-model');
 
+//User's shopping lists view
 const get_shoppingLists = (req,res,next)=>{
     const user = req.user;
     user.populate('shoppingLists').execPopulate().then(()=>{
@@ -12,6 +13,7 @@ const get_shoppingLists = (req,res,next)=>{
     });
 };
 
+//Shopping list view
 const get_shoppingList = (req,res,next) =>{
     console.log(req.params);
     console.log(req.query);
@@ -34,15 +36,26 @@ const post_shoppingList = (req,res,next)=>{
         return res.redirect('/');
     }
     console.log(req.body.list_name);
+    //Creates new shoppinglist
     let new_shoppingList = shoppingList_model({
         name: req.body.list_name
     });
+    //Adds shopping list to user list and database
     new_shoppingList.save().then( () => {
         req.user.shoppingLists.push(new_shoppingList);
         req.user.save().then(()=>{
             console.log('new shopping list saved');
             return res.redirect('/');
-        })
+        });
+    });
+};
+
+//Removes products from database which was on removed shopping list
+const delete_shoppingList_products = async (removed_shopping_list)=>{
+    await removed_shopping_list.products.forEach(product => {
+        product_model.findByIdAndRemove(product._id).then(()=>{
+            console.log('poistettu');
+        });
     });
 };
 
@@ -57,9 +70,10 @@ const post_delete_shoppingList = (req,res,next) =>{
     user.shoppingLists = updated_shopping_lists;
     user.save().then(()=>{
         //Delete shopping list from database
-        shoppingList_model.findByIdAndRemove(shopping_list_id_to_delete).then(()=>{
+        shoppingList_model.findByIdAndRemove(shopping_list_id_to_delete).then((removed_shopping_list)=>{
+            delete_shoppingList_products(removed_shopping_list);
             res.redirect('/');
-        })
+        });
     });
 };
 
@@ -68,11 +82,13 @@ const post_add_product = (req,res,next) => {
         return res.redirect('/');
     }
     console.log(req.body.product_name);
+    //Creates new product
     let new_product = product_model({
         name: req.body.product_name,
         quantity: req.body.quantity,
         image: req.body.product_image
     });
+    //Adds product to shopping list and database
     new_product.save().then( () => {
         shoppingList_model.findById({
             _id: req.body.list_id
