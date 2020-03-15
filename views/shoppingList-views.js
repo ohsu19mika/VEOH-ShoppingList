@@ -45,27 +45,48 @@ const shoppingList_view = ((data) => {
             <title>Shopping list ${data.shopping_list_name}</title>
         </head>
         <body>
-            <a href="/">Back to shopping lists view</a><br>
-            Shopping list: ${data.shopping_list_name}
-            <form action="/add-product" method="POST">
+            <a href="/">Back to shopping lists view</a>
+            <br>
+            <h3>Your shopping list: ${data.shopping_list_name}</h3>
+            <form action="/add-product" method="POST" id="add-product">
+                <p>Fill below to add new poduct on your list</p>
                 <input type="text" name="product_name" placeholder="name of product">
                 <input type="number" name="quantity" min="1" value="1">
                 <input type="text" name="product_image" placeholder="url for image">
                 <input type="hidden" name="list_id", value="${data.shoppingList_id}">
                 <button type="submit">Add product to list</button>
             </form>`;
-    data.products.forEach((product) => {
+    if (data.products.length != 0){
         html += `
-            <div>
-                ${product.name}, ${product.quantity}
-                <form action="/delete-product" method="POST">
-                    <input type="hidden" name="product_id", value="${product._id}">
-                    <input type="hidden" name="list_id", value="${data.shoppingList_id}">
-                    <button type="submit" class="delete_button">Delete product</button>
-                </form>
-            </div>`;
-    });
-
+        <p>Products on your shopping list:
+        `;
+        data.products.forEach((product) => {
+            html += `
+                <table>
+                    <tr>
+                        <th colspan="2">${product.name}</th>
+                    </tr>
+                    <tr>
+                        <td><img src="${product.image}" width="100"></img></td>
+                        <td>${product.quantity}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <form action="/delete-product" method="POST">
+                            <input type="hidden" name="product_id", value="${product._id}">
+                            <input type="hidden" name="list_id", value="${data.shoppingList_id}">
+                            <button type="submit" class="delete_button">Delete product</button>
+                            </form>
+                        </td>
+                    </tr>    
+                </table>`;
+        });
+    }
+    else{
+        html += `
+        <p>You not have any products on your list yet</p>
+        `;
+    }
     html += `
         </body>
         </html>

@@ -10,6 +10,35 @@ input {
     padding: 5px;
 }
 
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+h2 {
+    text-align: center;
+}
+
 .delete_button {
     background-color: firebrick;
+}
+
+#login-register {
+    height: 100%;
+    width: 100%;
+}
+#login-register div {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid rgb(71, 184, 36);
+    background-color: lightgoldenrodyellow;
+    padding: 15px;
+}
+
+#add-product {
+    border: 1px solid black;
+    padding: 5px;
 }

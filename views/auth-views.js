@@ -7,14 +7,19 @@ const login_view = ()=>{
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <form action="/login" method="POST">
-            <input type="text" name="user_name">
-            <button type="submit">Log in</button>
-        </form>
-        <form action="/register" method="POST">
-            <input type="text" name="user_name">
-            <button type="submit">Register</button>
-        </form>
+        <div id="login-register">
+        <div>
+            <h2>Shopping list app</h2>
+            <form action="/login" method="POST">
+                <input type="text" name="user_name">
+                <button type="submit">Log in</button>
+            </form>
+            <form action="/register" method="POST">
+                <input type="text" name="user_name">
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        </div>
     </body>
     </html>
     `;
