@@ -5,6 +5,7 @@ const login_view = ()=>{
     <head><title>Shopping list app</title>
         <meta http-equiv="Content-Type", content="text/html;charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="shortcut icon" href="https://icons.iconarchive.com/icons/iconsmind/outline/512/Shopping-Cart-icon.png"/>
     </head>
     <body>
         <div id="login-register">

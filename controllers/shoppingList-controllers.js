@@ -82,11 +82,19 @@ const post_add_product = (req,res,next) => {
         return res.redirect('/');
     }
     console.log(req.body.product_name);
+    //Check image url
+    let product_image ="";
+    if(!req.body.product_image){
+        product_image = "https://icons-for-free.com/iconfiles/png/512/cart+essential+product+shopping+ui+icon-1320166477493898567.png";
+    }
+    else{
+        product_image = req.body.product_image;
+    }
     //Creates new product
     let new_product = product_model({
         name: req.body.product_name,
         quantity: req.body.quantity,
-        image: req.body.product_image
+        image: product_image
     });
     //Adds product to shopping list and database
     new_product.save().then( () => {

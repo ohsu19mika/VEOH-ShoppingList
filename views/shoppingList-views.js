@@ -6,6 +6,7 @@ const shoppingLists_view = ((data) =>{
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" type="text/css" href="style.css">
+            <link rel="shortcut icon" href="https://icons.iconarchive.com/icons/iconsmind/outline/512/Shopping-Cart-icon.png"/>
             <title>Shopping lists</title>
         </head>
         <body>
@@ -42,6 +43,7 @@ const shoppingList_view = ((data) => {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" type="text/css" href="../style.css">
+            <link rel="shortcut icon" href="https://icons.iconarchive.com/icons/iconsmind/outline/512/Shopping-Cart-icon.png"/>
             <title>Shopping list ${data.shopping_list_name}</title>
         </head>
         <body>
