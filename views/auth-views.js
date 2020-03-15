@@ -4,6 +4,7 @@ const login_view = ()=>{
     <html>
     <head><title>Shopping list app</title>
         <meta http-equiv="Content-Type", content="text/html;charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <form action="/login" method="POST">

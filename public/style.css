@@ -1,0 +1,15 @@
+body {
+    background-color: darkgrey;
+}
+
+button {
+    padding: 5px;
+}
+
+input {
+    padding: 5px;
+}
+
+.delete_button {
+    background-color: firebrick;
+}

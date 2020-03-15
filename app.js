@@ -15,7 +15,7 @@ app.use(body_parser.urlencoded({
 }));
 
 //Serve static files
-//app.use('/css', express.static('css'));
+app.use(express.static('public'));
 
 
 app.use(session({
