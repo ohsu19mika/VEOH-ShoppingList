@@ -102,8 +102,31 @@ const post_add_product = (req,res,next) => {
     });
 };
 
+const post_delete_product = (req,res,next) =>{
+    const shopping_list_id = req.body.list_id;
+    const product_id_to_delete = req.body.product_id;
+
+    //Find shopping list
+    shoppingList_model.findById({
+        _id: shopping_list_id
+    }).then((shopping_list)=>{
+        //Remove product from shopping list
+        const updated_products = shopping_list.products.filter((product_id)=>{
+            return product_id != product_id_to_delete;
+        });
+        shopping_list.products = updated_products;
+        shopping_list.save().then(()=>{
+            //Delete product from database
+            product_model.findByIdAndRemove(product_id_to_delete).then(()=>{
+                res.redirect('/shoppinglist/'+shopping_list.name+'?id='+shopping_list._id);
+            });
+        });
+    });
+};
+
 module.exports.get_shoppingLists = get_shoppingLists;
 module.exports.get_shoppingList = get_shoppingList;
 module.exports.post_shoppingList = post_shoppingList;
 module.exports.post_delete_shoppingList = post_delete_shoppingList;
 module.exports.post_add_product = post_add_product;
+module.exports.post_delete_product = post_delete_product;

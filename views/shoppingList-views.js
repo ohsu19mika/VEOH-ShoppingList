@@ -43,6 +43,7 @@ const shoppingList_view = ((data) => {
             <title>Shopping list ${data.shopping_list_name}</title>
         </head>
         <body>
+            <a href="/">Back to shopping lists view</a><br>
             Shopping list: ${data.shopping_list_name}
             <form action="/add-product" method="POST">
                 <input type="text" name="product_name" placeholder="name of product">
@@ -57,6 +58,7 @@ const shoppingList_view = ((data) => {
                 ${product.name}, ${product.quantity}
                 <form action="/delete-product" method="POST">
                     <input type="hidden" name="product_id", value="${product._id}">
+                    <input type="hidden" name="list_id", value="${data.shoppingList_id}">
                     <button type="submit" class="delete_button">Delete product</button>
                 </form>
             </div>`;
