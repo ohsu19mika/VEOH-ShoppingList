@@ -49,7 +49,7 @@ const shoppingList_view = ((data) => {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" type="text/css" href="../style.css">
             <link rel="shortcut icon" href="https://icons.iconarchive.com/icons/iconsmind/outline/512/Shopping-Cart-icon.png"/>
-            <title>Shopping list ${data.shopping_list_name}</title>
+            <title>Shopping list: ${data.shopping_list_name}</title>
         </head>
         <body>
         <div class="full">
@@ -67,19 +67,24 @@ const shoppingList_view = ((data) => {
     if (data.products.length != 0){
         html += `
         <p>Products on your shopping list:
+        <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Image</th>
+                <th>Count</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
         `;
         data.products.forEach((product) => {
             html += `
-                <table>
+                <tbody>
                     <tr>
-                        <th colspan="2">${product.name}</th>
-                    </tr>
-                    <tr>
+                        <th>${product.name}</th>
                         <td><img src="${product.image}" width="100"></img></td>
                         <td>${product.quantity}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
+                        <td>
                             <form action="/delete-product" method="POST">
                             <input type="hidden" name="product_id", value="${product._id}">
                             <input type="hidden" name="list_id", value="${data.shoppingList_id}">
@@ -87,8 +92,9 @@ const shoppingList_view = ((data) => {
                             </form>
                         </td>
                     </tr>    
-                </table>`;
+                </tbody>`;
         });
+        html += `</table>`;
     }
     else{
         html += `
