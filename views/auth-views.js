@@ -8,8 +8,8 @@ const login_view = ()=>{
         <link rel="shortcut icon" href="https://icons.iconarchive.com/icons/iconsmind/outline/512/Shopping-Cart-icon.png"/>
     </head>
     <body>
-        <div id="login-register">
-        <div>
+        <div class="full">
+        <div class="middle-main">
             <h2>Shopping list app</h2>
             <form action="/login" method="POST">
                 <input type="text" name="user_name">

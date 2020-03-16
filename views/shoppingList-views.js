@@ -10,16 +10,19 @@ const shoppingLists_view = ((data) =>{
             <title>Shopping lists</title>
         </head>
         <body>
+        <div class="full">
             Logged in as user: ${data.user_name}
             <form action="/logout" method="POST">
                 <button type="submit">Log out</button>
             </form>
+            <div class="middle">
             <form action="/add-shopping-list" method="POST">
                 <input type="text" name="list_name" placeholder="name of list">
                 <button type="submit">Add shopping list</button>
             </form>`;
     data.shoppingLists.forEach((shoppingList) => {
         html += `
+            <hr>
             <div>
                 <a href="/shoppinglist/${shoppingList.name}?id=${shoppingList._id}">${shoppingList.name}</a>
                 <form action="/delete-shopping-list" method="POST">
@@ -29,6 +32,8 @@ const shoppingLists_view = ((data) =>{
             </div>`;
     });
     html += `
+        </div>
+        </div>
         </body>
         </html>`;
 
@@ -47,8 +52,9 @@ const shoppingList_view = ((data) => {
             <title>Shopping list ${data.shopping_list_name}</title>
         </head>
         <body>
+        <div class="full">
             <a href="/">Back to shopping lists view</a>
-            <br>
+            <div class="middle">
             <h3>Your shopping list: ${data.shopping_list_name}</h3>
             <form action="/add-product" method="POST" id="add-product">
                 <p>Fill below to add new poduct on your list</p>
@@ -90,6 +96,8 @@ const shoppingList_view = ((data) => {
         `;
     }
     html += `
+        </div>
+        </div>
         </body>
         </html>
     `;
