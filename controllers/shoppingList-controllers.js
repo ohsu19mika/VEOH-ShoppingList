@@ -15,8 +15,6 @@ const get_shoppingLists = (req,res,next)=>{
 
 //Shopping list view
 const get_shoppingList = (req,res,next) =>{
-    console.log(req.params);
-    console.log(req.query);
     const shopping_list_id = req.query.id;
     shoppingList_model.findById({
         _id: shopping_list_id
@@ -110,6 +108,21 @@ const post_add_product = (req,res,next) => {
     });
 };
 
+const post_update_count = (req,res,next) => {
+    const product_id = req.body.product_id;
+    const new_quantity = req.body.quantity;
+
+    //Find product
+    product_model.findById(product_id).then((product_to_update)=>{
+        //Update quantity
+        product_to_update.quantity = new_quantity;
+        product_to_update.save().then(()=>{
+            console.log('Quantity updated');
+            res.redirect('/shoppinglist/'+req.params.name+'?id='+req.query.id);
+        });
+    });
+};
+
 const post_delete_product = (req,res,next) =>{
     const shopping_list_id = req.body.list_id;
     const product_id_to_delete = req.body.product_id;
@@ -137,4 +150,5 @@ module.exports.get_shoppingList = get_shoppingList;
 module.exports.post_shoppingList = post_shoppingList;
 module.exports.post_delete_shoppingList = post_delete_shoppingList;
 module.exports.post_add_product = post_add_product;
+module.exports.post_update_count = post_update_count;
 module.exports.post_delete_product = post_delete_product;

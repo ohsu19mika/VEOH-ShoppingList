@@ -66,7 +66,7 @@ const shoppingList_view = ((data) => {
                     </tr>
                     <tr>
                         <td><input type="text" name="product_name" id="pname" placeholder="name of product"></td>
-                        <td><input type="number" name="quantity" id="pquantity" min="1" value="1"></td>
+                        <td><input type="number" class="quantity" name="quantity" id="pquantity" min="1" value="1"></td>
                         <td><input type="text" name="product_image" id="purl" placeholder="url for image"></td>
                         <input type="hidden" name="list_id", value="${data.shoppingList_id}">
                         <td><button type="submit">Add product to list</button></td>
@@ -92,7 +92,14 @@ const shoppingList_view = ((data) => {
                     <tr>
                         <th>${product.name}</th>
                         <td><img src="${product.image}" width="100"></img></td>
-                        <td>${product.quantity}</td>
+                        <td>
+                            <form action="/shoppinglist/${data.shopping_list_name}?id=${data.shoppingList_id}" method="POST">
+                            <input type="number" class="quantity" name="quantity" min="1" value="${product.quantity}">
+                            <br>
+                            <input type="hidden" name="product_id", value="${product._id}">
+                            <button type="submit">Update</button>
+                            </form>
+                        </td>
                         <td>
                             <form action="/delete-product" method="POST">
                             <input type="hidden" name="product_id", value="${product._id}">
