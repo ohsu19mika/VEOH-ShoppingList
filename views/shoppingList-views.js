@@ -58,15 +58,24 @@ const shoppingList_view = ((data) => {
             <h3>Your shopping list: ${data.shopping_list_name}</h3>
             <form action="/add-product" method="POST" id="add-product">
                 <p>Fill below to add new poduct on your list</p>
-                <input type="text" name="product_name" placeholder="name of product">
-                <input type="number" name="quantity" min="1" value="1">
-                <input type="text" name="product_image" placeholder="url for image">
-                <input type="hidden" name="list_id", value="${data.shoppingList_id}">
-                <button type="submit">Add product to list</button>
+                <table>
+                    <tr>
+                        <th><label for="pname">Product name:</label></th>
+                        <th><label for="pquantity">Quantity:</label></th>
+                        <th><label for="purl">Url for image:</label></th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="product_name" id="pname" placeholder="name of product"></td>
+                        <td><input type="number" name="quantity" id="pquantity" min="1" value="1"></td>
+                        <td><input type="text" name="product_image" id="purl" placeholder="url for image"></td>
+                        <input type="hidden" name="list_id", value="${data.shoppingList_id}">
+                        <td><button type="submit">Add product to list</button></td>
+                    </tr>
+                </table>
             </form>`;
     if (data.products.length != 0){
         html += `
-        <p>Products on your shopping list:
+        <h4>Products on your shopping list:</h4>
         <table>
         <thead>
             <tr>
